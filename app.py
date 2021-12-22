@@ -3,6 +3,8 @@ from tkinter import ttk
 from gui.views.entry_data import EntryDataFrame
 from gui.views.regression_frame import RegressionFrame
 from gui.views.menu_nav_bar import Navbar
+from gui.views.help_window import HelpWindow
+from gui.views.about_window import AboutWindow
 
 APP_HEIGHT = 600
 APP_WIDTH = 1024
@@ -12,6 +14,7 @@ class MainApp(tk.Tk):
         super().__init__()
         self.title("HidroSedi - IVRC Module v1.0")
         self.geometry(f"{APP_WIDTH}x{APP_HEIGHT}")
+        # instanciamento da navbar, criação do menu widget
         self.menu_bar = Navbar(parent=self)
         self.config(menu=self.menu_bar)
         # criação do notebook
@@ -24,6 +27,12 @@ class MainApp(tk.Tk):
         self.notebook.add(self.regression_frame, text="Regression")
         # posição do notebook widget no tkframe
         self.notebook.place(x=0, y=0, width=APP_WIDTH, height=APP_HEIGHT)
+    
+    def open_help_page(self):
+        HelpWindow() 
+    
+    def open_about_page(self):
+        AboutWindow()
     
 
 if __name__ == '__main__':
