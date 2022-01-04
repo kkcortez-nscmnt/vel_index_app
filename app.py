@@ -14,6 +14,7 @@ class MainApp(tk.Tk):
         super().__init__()
         self.title("HidroSedi - IVRC Module v1.0")
         self.geometry(f"{APP_WIDTH}x{APP_HEIGHT}")
+        self.resizable(1, 1)
         # instanciamento da navbar, criação do menu widget
         self.menu_bar = Navbar(parent=self)
         self.config(menu=self.menu_bar)
@@ -26,7 +27,7 @@ class MainApp(tk.Tk):
         self.notebook.add(self.entry_data_frame, text="Data config")
         self.notebook.add(self.regression_frame, text="Regression")
         # posição do notebook widget no tkframe
-        self.notebook.place(x=0, y=0, width=APP_WIDTH, height=APP_HEIGHT)
+        self.notebook.pack(expand=1, fill='both')
     
     def open_help_page(self):
         HelpWindow() 
@@ -38,6 +39,3 @@ class MainApp(tk.Tk):
 if __name__ == '__main__':
     app = MainApp()
     app.mainloop()
-
-
-

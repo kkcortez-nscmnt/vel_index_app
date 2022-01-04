@@ -2,6 +2,8 @@ import tkinter as tk
 from tkinter import ttk
 
 
+FONT = 11
+
 class EntryDataFrame(ttk.Frame):
     def __init__(self, parent):
         super().__init__()

@@ -1,8 +1,8 @@
 import tkinter as tk
 
 FONT_SIZE = 9
-WINDOW_WIDTH = 600
-WINDOW_HIGHT = 900
+WINDOW_WIDTH = 550
+WINDOW_HIGHT = 650
 
 class BaseWindow(tk.Toplevel):
     def __init__(self):
