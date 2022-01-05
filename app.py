@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-from gui.views.entry_data import EntryDataFrame
+from gui.views.entry_data_frame import EntryDataFrame
 from gui.views.regression_frame import RegressionFrame
 from gui.views.menu_nav_bar import Navbar
 from gui.views.help_window import HelpWindow
