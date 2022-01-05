@@ -8,6 +8,7 @@ day = ["%.2d" % i for i in range(1, 32)]
 hour  = ["%.2d" % i for i in range(00,24)]
 minutes = ["%.2d" % i for i in range(00,60)]
 seconds = ["%.2d" % i for i in range(00,60)]
+db_colmuns = ['Date Time', 'Flow rate', 'Area', 'Avarege spd', 'X spd', 'Level' ]
 
 class EntryDataFrame(ttk.Frame):
     def __init__(self, parent):
@@ -58,21 +59,55 @@ class EntryDataFrame(ttk.Frame):
         self.day_combobox.place(rely=0.09, relx=0.68)
 
         ##### Label frame time hh:mm:ss #####
-        self.label_set_time =ttk.LabelFrame(self, text= " Set Initial Time: Hour-Minutes-Seconds ")
-        self.label_set_time.place(rely=0.45, relx=0.009, height=50, width=460)
+        self.initial_label_set_time =ttk.LabelFrame(self, text= " Set Initial Time: Hour-Minutes-Seconds ")
+        self.initial_label_set_time.place(rely=0.45, relx=0.009, height=50, width=460)
         ##### Set date combobox #####
         # year
-        self.hour_combobox= ttk.Combobox(self.label_set_time, values=hour)
-        self.hour_combobox.set("Hour")
-        self.hour_combobox.place(rely=0.09, relx=0.01)
+        self.initial_hour_combobox= ttk.Combobox(self.initial_label_set_time, values=hour)
+        self.initial_hour_combobox.set("Hour")
+        self.initial_hour_combobox.place(rely=0.09, relx=0.01)
         # month
-        self.minute_combobox = ttk.Combobox(self.label_set_time, values=minutes)
-        self.minute_combobox.set("Minute")
-        self.minute_combobox.place(rely=0.09, relx=0.345)
+        self.initial_minute_combobox = ttk.Combobox(self.initial_label_set_time, values=minutes)
+        self.initial_minute_combobox.set("Minute")
+        self.initial_minute_combobox.place(rely=0.09, relx=0.345)
         # day
-        self.second_combobox = ttk.Combobox(self.label_set_time, values=seconds)
-        self.second_combobox.set("Second")
-        self.second_combobox.place(rely=0.09, relx=0.68)
+        self.initial_second_combobox = ttk.Combobox(self.initial_label_set_time, values=seconds)
+        self.initial_second_combobox.set("Second")
+        self.initial_second_combobox.place(rely=0.09, relx=0.68)
+
+        ##### Label frame time hh:mm:ss #####
+        self.final_label_set_time =ttk.LabelFrame(self, text= " Set Final Time: Hour-Minutes-Seconds ")
+        self.final_label_set_time.place(rely=0.55, relx=0.009, height=50, width=460)
+        ##### Set date combobox #####
+        # year
+        self.final_hour_combobox= ttk.Combobox(self.final_label_set_time, values=hour)
+        self.final_hour_combobox.set("Hour")
+        self.final_hour_combobox.place(rely=0.09, relx=0.01)
+        # month
+        self.final_minute_combobox = ttk.Combobox(self.final_label_set_time, values=minutes)
+        self.final_minute_combobox.set("Minute")
+        self.final_minute_combobox.place(rely=0.09, relx=0.345)
+        # day
+        self.final_second_combobox = ttk.Combobox(self.final_label_set_time, values=seconds)
+        self.final_second_combobox.set("Second")
+        self.final_second_combobox.place(rely=0.09, relx=0.68)
+
+        ##### Display Frame Data #####
+        self.data_base_frame = ttk.LabelFrame(self, text='Data Base Display')
+        self.data_base_frame.place(rely=0.03, relx=0.47, height=600, width=670)
+
+        ##### Display tree view #####
+        self.data_base_treeview = ttk.Treeview(self.data_base_frame)
+        self.data_base_treeview.place(relheight=1, relwidth=1)
+        self.db_treeview_scrolly = ttk.Scrollbar(self.data_base_treeview, orient='vertical',
+            command=self.data_base_treeview.yview)
+        self.db_treeview_scrollx = ttk.Scrollbar(self.data_base_treeview, orient='horizontal',
+            command=self.data_base_treeview.xview)
+        self.data_base_treeview.configure(yscrollcommand=self.db_treeview_scrolly.set,
+            xscrollcommand=self.db_treeview_scrollx.set)
+        self.db_treeview_scrolly.pack(side='right', fill='y')
+        self.db_treeview_scrollx.pack(side='bottom', fill='x')
+
 
         
     
