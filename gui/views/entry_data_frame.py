@@ -1,5 +1,7 @@
+
 import tkinter as tk
-from tkinter import ttk
+from tkinter import ttk, filedialog, messagebox
+
 
 
 years = list(range(1930,2101))
@@ -19,13 +21,13 @@ class EntryDataFrame(ttk.Frame):
         self.label_sl500.place(rely=0.03, relx=0.009, height=90, width=460)
 
         ##### label path dos arquivos .dat #####
-        self.label_sl500_path = ttk.Label(self.label_sl500, relief='ridge', anchor='w')
-        self.label_sl500_path.place(rely=0.08, relx=0.19, height=23, width=367)
+        self.label_sl500_dat_path = ttk.Label(self.label_sl500, relief='ridge', anchor='w')
+        self.label_sl500_dat_path.place(rely=0.08, relx=0.19, height=23, width=367)
         # label path dos arquivos .vel
-        self.label_sl500_path = ttk.Label(self.label_sl500, relief='ridge', anchor='w')
-        self.label_sl500_path.place(rely=0.60, relx=0.19, height=23, width=367)
+        self.label_sl500_vel_path = ttk.Label(self.label_sl500, relief='ridge', anchor='w')
+        self.label_sl500_vel_path.place(rely=0.60, relx=0.19, height=23, width=367)
         # botão arquivo DAT
-        self.btn_sl500_file = ttk.Button(self.label_sl500, padding=2, text='dat file') # todo command
+        self.btn_sl500_file = ttk.Button(self.label_sl500, padding=2, text='dat file', command=self.select_dat_file) # todo command
         self.btn_sl500_file.place(rely=0.04, relx= 0.01)
         # botão arquivo VAL
         self.btn_sl500_file = ttk.Button(self.label_sl500, padding=2, text='vel file') # todo command
@@ -107,6 +109,25 @@ class EntryDataFrame(ttk.Frame):
             xscrollcommand=self.db_treeview_scrollx.set)
         self.db_treeview_scrolly.pack(side='right', fill='y')
         self.db_treeview_scrollx.pack(side='bottom', fill='x')
+    
+    def select_dat_file(self):
+        self.filename = filedialog.askopenfilename(
+            initialdir='/',
+            title=' Select a .dat extension file.',
+            filetype=(("dat files",".dat"),("all files", "."))
+        )
+        try:
+            self.filename == True
+            self.label_sl500_dat_path['text'] = self.filename
+            return self.filename
+        except ValueError:
+            tk.messagebox.showerror('Information', "Error: File type.")
+            return None
+        except FileNotFoundError:
+            tk.messagebox.showerror('Information', f'No such file found.')
+            return None
+
+
 
 
         
